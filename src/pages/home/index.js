@@ -8,7 +8,8 @@ class Home extends Component {
     super();
 
     this.state = {
-      binary: 0,
+      binary: "",
+      decimal: 0,
       warning: null
     }
   }
@@ -25,12 +26,29 @@ class Home extends Component {
       }
     }
     this.setState({ binary, warning });
+    this.convert(binary);
+  }
+
+  convert(binary) {
+    binary = binary.toString();
+    console.log("bin", binary);
+    if (!binary.length) return;
+    let decimal = 0;
+    let pow = 0;
+    for(let b = binary.length - 1; b >= 0; b--) {
+      const bit = parseInt(binary[b]);
+      decimal += Math.pow(2, pow) * bit;
+      pow++;
+    }
+    this.setState({ decimal });
+    //document.getElementById("decimal").value = decimal;
   }
 
   render() {
-    const { warning } = this.state;
+    const { warning, decimal } = this.state;
     return (
       <div>
+        <h1>Binary Input</h1>
         {warning !== null && <p>{warning}</p>}
         <input
           type="text"
@@ -41,6 +59,13 @@ class Home extends Component {
           onChange={e =>
             this.changeBinary(e.target.value)
           }
+        />
+        <h1>Decimal Output</h1>
+        <input
+          type="text"
+          id="decimal"
+          value={decimal}
+          readOnly
         />
       </div>
     );
