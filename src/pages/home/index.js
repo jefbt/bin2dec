@@ -9,21 +9,26 @@ class Home extends Component {
 
     this.state = {
       binary: "",
-      decimal: 0,
+      decimal: "",
       warning: null
     }
   }
 
   changeBinary(binary) {
     let warning = null;
-    for (let i in binary) {
-      if (binary[i] !== "0" &&
-      binary[i] !== "1")
-      {
-        warning = errors.wrongInput;
-        this.setState({ warning });
-        return;
+    if (binary.length) {
+      for (let i in binary) {
+        if (binary[i] !== "0" &&
+        binary[i] !== "1")
+        {
+          warning = errors.wrongInput;
+          this.setState({ warning });
+          this.setState({ decimal: "" });
+          return;
+        }
       }
+    } else {
+      this.setState({ decimal: "" });
     }
     this.setState({ binary, warning });
     this.convert(binary);
@@ -41,7 +46,6 @@ class Home extends Component {
       pow++;
     }
     this.setState({ decimal });
-    //document.getElementById("decimal").value = decimal;
   }
 
   render() {
@@ -53,7 +57,6 @@ class Home extends Component {
         <input
           type="text"
           autoFocus
-          maxLength="8"
           id="binary"
           placeholder="Type 0's and 1's"
           onChange={e =>
