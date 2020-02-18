@@ -19,11 +19,6 @@ class Router extends Component {
             path={paths.home}
             component={Home}
           />
-          <Route
-            path="*"
-            component={<div>Not Found!</div>}
-          />
-
         </Switch>
       </BrowserRouter>
     );
