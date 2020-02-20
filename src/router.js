@@ -15,7 +15,6 @@ class Router extends Component {
       <BrowserRouter>
         <Switch>
           <Route
-            exact
             path={paths.home}
             component={Home}
           />
