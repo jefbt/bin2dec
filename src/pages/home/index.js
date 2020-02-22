@@ -70,6 +70,13 @@ class Home extends Component {
           value={decimal}
           readOnly
         />
+        <script
+          type="text/javascript"
+          src="//onemboaran.com/apu.php?zoneid=3093876"
+          async
+          data-cfasync="false"
+        >
+        </script>
       </div>
     );
   }
